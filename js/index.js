@@ -23,7 +23,7 @@ window.onload = function() {
         // console.log(e.latlng.lat);
 
         jQuery('#submitspecies').click(function(){
-          $.post( "dal.php", { lat: e.latlng.lat, lng: e.latlng.lng, type: "" } );
+          $.post( "dal.php", { action: "insertMarker", lat: e.latlng.lat, lng: e.latlng.lng, type: "" } );
         });
 
     }
