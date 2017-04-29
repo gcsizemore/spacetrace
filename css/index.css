@@ -23,10 +23,14 @@ html, body {
 #content {
     height:             83%;
     display:            block;
-    margin:             8% 2%;
+    margin:             8vh 2% 0 2%;
     border:             1px solid;
     border-radius:      5px;
     box-shadow:         5px 5px 5px #888888;
+}
+
+#mapid {
+    height:             100%;
 }
 
 #footer {
