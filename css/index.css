@@ -1,0 +1,45 @@
+html, body {
+  margin: 0px;
+  padding: 0px;
+  min-height: 100vh;
+  height: 100vh;
+}
+
+#header {
+    background-color:   #0F4D92;
+    display:            block;
+    height:             7%;
+    position:           absolute;
+    top:                0;
+    width:              100%;
+}
+
+#header h3, #header h5 {
+    text-align:         center;
+    margin:             0;
+    color:              #FFFFFF;
+}
+
+#content {
+    height:             83%;
+    display:            block;
+    margin:             8% 2%;
+    border:             1px solid;
+    border-radius:      5px;
+    box-shadow:         5px 5px 5px #888888;
+}
+
+#footer {
+    background-color:   #cccccc;
+    position:           absolute;
+    bottom:             0;
+    height:             7%;
+    width:              100%;
+    display:            block;
+}
+
+#footer p {
+    margin:             0 auto;
+    text-align:         center;
+}
+
