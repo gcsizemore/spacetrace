@@ -16,17 +16,25 @@ window.onload = function() {
     var popup = L.popup();
 
     function onMapClick(e) {
+      //* Create the popup to ask about invasive species.
       popup
         .setLatLng(e.latlng)
-        .setContent('<div> <label>What Did You Find?</label> <input type="text" name="name" value="" id="name"> <input type="submit" name="submit" value="Save" class="button" id="submitspecies"></div>')
+        .setContent('<div> <label>What Did You Find?</label> <select id="species">  <option value="1">Kudzu</option>  <option value="2">Termites</option>  <option value="3">Nerds</option>  <option value="4">Fire Ants</option>  <option value="5">Johnson Grass</option>  <option value="6">Crab Grass</option></select> <input type="submit" name="submit" value="Save" class="button" id="submitspecies"></div>')
         .openOn(mymap);
-        // console.log(e.latlng.lat);
 
-        jQuery('#submitspecies').click(function(){
-          $.post( "dal.php", { lat: e.latlng.lat, lng: e.latlng.lng, type: "" } );
+      //* Send data when the save button is click
+      jQuery('#submitspecies').click(function() {
+        var species = $( "select#species" ).val();
+        $.post("dal.php", {
+          action: "insertMarker",
+          lat: e.latlng.lat,
+          lng: e.latlng.lng,
+          species: species
         });
+      });
 
     }
+
     mymap.on('click', onMapClick);
 
   }
