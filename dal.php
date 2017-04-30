@@ -27,6 +27,7 @@ function deleteMarker($id){
 
 function getAllMarkers($speciesID='0'){
     global $mysqli;
+    $outp = "[[";
     $stmt = $mysqli->stmt_init();
     $query = "SELECT * FROM markers WHERE deleted = 0";
     if($type != '0'){
@@ -36,10 +37,31 @@ function getAllMarkers($speciesID='0'){
         $stmt->prepare($query);
     }
     $stmt->execute();
+    $stmt->bind_result($id,$lat,$long,$speciesID);
+    while ($stmt->fetch()) {
+        $outp.="{id:".$id.",lat:".$lat.",lng:".$long.",speciesID:".$speciesID."},";
+    }
+    $outp.="],[";
+    $stmt = $mysqli->stmt_init();
+    $query = "SELECT * FROM markers WHERE deleted = 0 AND timestamp > ?";
+    if($type != '0'){
+        $stmt->prepare($query." AND WHERE speciesID = ?");
+        $stmt->bind_param("ss", $timestamp, $speciesID);
+    }else{
+        $stmt->prepare($query);
+        $stmt->bind_param("s", $timestamp);
+    }
+    $stmt->execute();
+    $stmt->bind_result($id,$lat,$long,$speciesID);
+    while ($stmt->fetch()) {
+        $outp.="{id:".$id.",lat:".$lat.",lng:".$long.",speciesID:".$speciesID."},";
+    }
+    $outp.="]]";
+    echo json_encode($outp);
     $mysqli->close();
 }
 
-function getAllSpecies(){
+function getAllSpecies($json){
     global $mysqli;
     $result = $mysqli->query("SELECT * FROM species");
     $outp = $result->fetch_all(MYSQLI_ASSOC);
@@ -57,7 +79,7 @@ switch($_POST['action']){
         getAllMarkers($_POST['speciesID']);
         break;
     case "getAllSpecies":
-        getAllSpecies();
+        getAllSpecies($_POST['json']);
         break;
 }
 
