@@ -25,7 +25,7 @@ function deleteMarker($id){
     $mysqli->close();
 }
 
-function getAllMarkers($speciesID='0'){
+function getAllMarkers($speciesID='0',$timestamp){
     global $mysqli;
     $outp = "[[";
     $stmt = $mysqli->stmt_init();
@@ -76,7 +76,7 @@ switch($_POST['action']){
         deleteMarker($_POST['id']);
         break;
     case "getAllMarkers":
-        getAllMarkers($_POST['speciesID']);
+        getAllMarkers($_POST['speciesID'],$_POST['timestamp']);
         break;
     case "getAllSpecies":
         getAllSpecies($_POST['json']);

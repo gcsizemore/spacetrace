@@ -29,10 +29,9 @@ function mapIcons(mymap,icons) {
   
   var iconObjects = {"KudzuIcon":KudzuIcon,"redIcon":redIcon,"orangeIcon":orangeIcon}
 
-  console.log(L.marker([34.73, -86.5], {icon: KudzuIcon}).addTo(mymap));
+  // console.log(L.marker([34.73, -86.5], {icon: KudzuIcon}).addTo(mymap));
   // L.marker([34.72, -86.6], {icon: redIcon}).addTo(mymap);
   // L.marker([34.71, -86.7], {icon: orangeIcon}).addTo(mymap);
-
   $.each(allMarkers, function( i, marker ) {
     L.marker([marker.lat, marker.lng], {icon: iconObjects[icons[marker.speciesID]]}).addTo(mymap);
   });

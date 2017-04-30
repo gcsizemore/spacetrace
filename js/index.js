@@ -2,22 +2,24 @@ window.onload = function() {
   var position;
   var selectList;
   var icons;
+  var lastUpdate = '0000-00-00 00:00:00';
   var allMarkers = [];
   var newMarkers = [];
 
   function getAllUpdates() {
     $.post("dal.php", {
-        action: "getAllMarkers"
+        action: "getAllMarkers", timestamp: lastUpdate
       })
       .done(function(data) {
         dataObj = JSON.parse(data);
+        console.log("Obj0" + dataObj);
         allMarkers = dataObj[0];
         newMarkers = dataObj[1];
       });
   }
 
   var buildDeferred = $.Deferred();
-  buildDeferred.done(buildSelect()).done(getLocation());
+  buildDeferred.done(refreshView()).done(getLocation());
 
   function buildSelect() {
 
@@ -58,7 +60,7 @@ window.onload = function() {
     }).addTo(mymap);
 
     //* Call species icons from js/map_icons.js
-    mapIcons(mymap, icons);
+    mapIcons(mymap, icons, allMarkers);
 
     var popup = L.popup();
 
