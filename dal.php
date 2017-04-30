@@ -39,6 +39,13 @@ function getAllMarkers($speciesID='0'){
     $mysqli->close();
 }
 
+function getAllSpecies(){
+    global $mysqli;
+    $result = $mysqli->query("SELECT * FROM species");
+    $outp = $result->fetch_all(MYSQLI_ASSOC);
+    echo json_encode($outp);
+}
+
 switch($_POST['action']){
     case "insertMarker":
         insertMarker($_POST['lat'],$_POST['lng'],$_POST['speciesID']);
@@ -48,6 +55,9 @@ switch($_POST['action']){
         break;
     case "getAllMarkers":
         getAllMarkers($_POST['speciesID']);
+        break;
+    case "getAllSpecies":
+        getAllSpecies();
         break;
 }
 
