@@ -1,18 +1,19 @@
-var gulp        = require('gulp'),
-    browserSync = require('browser-sync').create();
+//* Plugins
+var gulp         = require('gulp'),
+    browserSync  = require('browser-sync');
 
-//* BrowserSync
-gulp.task('browser-sync', function () {
-  browserSync.init({
-    server: {
-      baseDir: './'
-    },
-    // browser: 'firefox',
-    reloadDelay: 500
+
+//* Browser Sync
+gulp.task('browser-sync', function() {
+  var files = [
+    './*.php'
+  ];
+  browserSync.init(files, {
+    proxy: "local.dev/spacetrace"
   });
   gulp.watch('**/*.*').on('change', browserSync.reload);
 });
 
 
-//* Default task (build and serve)
+// Watch Task (default)
 gulp.task('default', ['browser-sync']);

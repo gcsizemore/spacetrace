@@ -29,18 +29,19 @@ window.onload = function() {
     var popup = L.popup();
 
     function onMapClick(e) {
+      //* Create the popup to ask about invasive species.
       popup
         .setLatLng(e.latlng)
         .setContent('<div> <label>What Did You Find?</label> <select>'+ selectList +'</select>'+
             '<input type="submit" name="submit" value="Save" class="button" id="submitspecies"></div>')
         .openOn(mymap);
-        // console.log(e.latlng.lat);
 
         jQuery('#submitspecies').click(function(){
           $.post( "dal.php", { action: "insertMarker", lat: e.latlng.lat, lng: e.latlng.lng, speciesID: "" } );
-        });
+      });
 
     }
+
     mymap.on('click', onMapClick);
 
   }
