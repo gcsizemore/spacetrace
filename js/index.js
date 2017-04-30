@@ -1,9 +1,9 @@
 window.onload = function() {
   var position;
   var selectList;
+  var icons;
   var allMarkers = [];
   var newMarkers = [];
-  getLocation();
 
   function getAllUpdates() {
     $.post("dal.php", {
@@ -16,12 +16,12 @@ window.onload = function() {
       });
   }
 
-  function refreshView() {
-    buildSelect();
-    getAllUpdates();
-  }
+  var buildDeferred = $.Deferred();
+  buildDeferred.done(buildSelect()).done(getLocation());
 
   function buildSelect() {
+    // var buildDeferred = jQuery.Deferred();
+
     $.post("dal.php", {
         action: "getAllSpecies"
       })
@@ -36,8 +36,18 @@ window.onload = function() {
         }
         iconList += '"0":"error"}';
         icons = JSON.parse(iconList);
+        // buildDeferred.resolve( "hurry" );
       });
+
+      // return buildDeferred.promise();
+
   }
+
+  function refreshView() {
+    getAllUpdates();
+    buildSelect();
+  }
+
   refreshView();
 
   function getLocation() {
@@ -79,5 +89,15 @@ window.onload = function() {
     mymap.on('click', onMapClick);
 
   }
+
+  // function buildMap() {
+  //   $.when(buildSelect).done(function() {
+  //     getLocation();
+  //   });
+  // }
+  //
+  // buildMap();
+
+  buildDeferred.resolve( "hurry" );
 
 };

@@ -1,4 +1,4 @@
-allMarkers = [{lat:34.73,lng:-86.5,speciesID:1,timeStamp:'33'},{lat:34.73,lng:-86.5,speciesID:1},{lat:34.73,lng:-86.5,speciesID:1},{lat:34.73,lng:-86.5,speciesID:1}];
+allMarkers = [{lat:34.73,lng:-86.5,speciesID:1,timeStamp:'33'},{lat:34.73,lng:-86.5,speciesID:1,timeStamp:'33'},{lat:34.73,lng:-86.5,speciesID:1,timeStamp:'33'},{lat:34.73,lng:-86.5,speciesID:1,timeStamp:'33'}];
 
 function mapIcons(mymap,icons) {
 
