@@ -20,7 +20,6 @@ window.onload = function() {
   buildDeferred.done(buildSelect()).done(getLocation());
 
   function buildSelect() {
-    // var buildDeferred = jQuery.Deferred();
 
     $.post("dal.php", {
         action: "getAllSpecies"
@@ -36,10 +35,7 @@ window.onload = function() {
         }
         iconList += '"0":"error"}';
         icons = JSON.parse(iconList);
-        // buildDeferred.resolve( "hurry" );
       });
-
-      // return buildDeferred.promise();
 
   }
 
@@ -89,14 +85,6 @@ window.onload = function() {
     mymap.on('click', onMapClick);
 
   }
-
-  // function buildMap() {
-  //   $.when(buildSelect).done(function() {
-  //     getLocation();
-  //   });
-  // }
-  //
-  // buildMap();
 
   buildDeferred.resolve( "hurry" );
 

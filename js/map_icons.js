@@ -26,13 +26,16 @@ function mapIcons(mymap,icons) {
   L.icon = function (options) {
     return new L.Icon(options);
   };
+  
+  var iconObjects = {"KudzuIcon":KudzuIcon,"redIcon":redIcon,"orangeIcon":orangeIcon}
 
-  // L.marker([34.73, -86.5], {icon: greenIcon}).addTo(mymap);
+  // console.log(L.marker([34.73, -86.5], {icon: KudzuIcon}).addTo(mymap));
   // L.marker([34.72, -86.6], {icon: redIcon}).addTo(mymap);
   // L.marker([34.71, -86.7], {icon: orangeIcon}).addTo(mymap);
 
   $.each(allMarkers, function( i, marker ) {
-    L.marker([marker.lat, marker.lng], {icon: icons["" + marker.speciesID]}).addTo(mymap);
+      console.log(typeof marker.lat);
+    L.marker([marker.lat, marker.lng]).addTo(mymap);
   });
 
 }
