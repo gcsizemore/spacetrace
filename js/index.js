@@ -1,6 +1,19 @@
 window.onload = function() {
   var position;
+  var selectList;
   getLocation();
+  function buildSelect(){
+        $.post( "dal.php", { action: "getAllSpecies"} )
+        .done(function(data){
+            selectList = '';
+            dataObj = JSON.parse(data);
+            for (var i = 0; i < dataObj.length; i++){
+                var obj = dataObj[i];
+                selectList+='<option value=' + obj['id'] + '>' + obj['name'] + '</option>';
+            }
+        });
+    }
+  buildSelect();
 
   function getLocation() {
     navigator.geolocation.getCurrentPosition(showPosition);
@@ -18,12 +31,13 @@ window.onload = function() {
     function onMapClick(e) {
       popup
         .setLatLng(e.latlng)
-        .setContent('<div> <label>What Did You Find?</label> <input type="text" name="name" value="" id="name"> <input type="submit" name="submit" value="Save" class="button" id="submitspecies"></div>')
+        .setContent('<div> <label>What Did You Find?</label> <select>'+ selectList +'</select>'+
+            '<input type="submit" name="submit" value="Save" class="button" id="submitspecies"></div>')
         .openOn(mymap);
         // console.log(e.latlng.lat);
 
         jQuery('#submitspecies').click(function(){
-          $.post( "dal.php", { action: "insertMarker", lat: e.latlng.lat, lng: e.latlng.lng, type: "" } );
+          $.post( "dal.php", { action: "insertMarker", lat: e.latlng.lat, lng: e.latlng.lng, speciesID: "" } );
         });
 
     }
