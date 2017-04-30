@@ -1,4 +1,4 @@
-allMarkers = [{lat:34.73,lng:-86.5,speciesID:1,timeStamp:'33'},{lat:34.73,lng:-86.5,speciesID:1,timeStamp:'33'},{lat:34.73,lng:-86.5,speciesID:1,timeStamp:'33'},{lat:34.73,lng:-86.5,speciesID:1,timeStamp:'33'}];
+allMarkers = [{lat:34.73,lng:-86.5,speciesID:1,timeStamp:'33'},{lat:34.73,lng:-86.4,speciesID:1,timeStamp:'33'},{lat:34.73,lng:-86.3,speciesID:1,timeStamp:'33'},{lat:34.73,lng:-86.2,speciesID:1,timeStamp:'33'}];
 
 function mapIcons(mymap,icons) {
 
@@ -29,13 +29,12 @@ function mapIcons(mymap,icons) {
   
   var iconObjects = {"KudzuIcon":KudzuIcon,"redIcon":redIcon,"orangeIcon":orangeIcon}
 
-  // console.log(L.marker([34.73, -86.5], {icon: KudzuIcon}).addTo(mymap));
+  console.log(L.marker([34.73, -86.5], {icon: KudzuIcon}).addTo(mymap));
   // L.marker([34.72, -86.6], {icon: redIcon}).addTo(mymap);
   // L.marker([34.71, -86.7], {icon: orangeIcon}).addTo(mymap);
 
   $.each(allMarkers, function( i, marker ) {
-      console.log(typeof marker.lat);
-    L.marker([marker.lat, marker.lng]).addTo(mymap);
+    L.marker([marker.lat, marker.lng], {icon: iconObjects[icons[marker.speciesID]]}).addTo(mymap);
   });
 
 }
